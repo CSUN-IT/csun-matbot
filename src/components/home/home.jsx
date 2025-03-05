@@ -64,8 +64,9 @@ const Home = () => {
     setDisabled(true);
 
     try {
+      console.log(process.env.REACT_APP_BACKEND_API_ENDPOINT);
       // Make a POST request to the Flask API
-      const response = await fetch('http://130.166.1.214:5000/hello/chatbot', {
+      const response = await fetch(process.env.REACT_APP_BACKEND_API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
