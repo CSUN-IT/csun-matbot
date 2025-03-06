@@ -64,7 +64,6 @@ const Home = () => {
     setDisabled(true);
 
     try {
-      console.log(process.env.REACT_APP_BACKEND_API_ENDPOINT);
       // Make a POST request to the Flask API
       const response = await fetch(process.env.REACT_APP_BACKEND_API_ENDPOINT, {
         method: 'POST',
