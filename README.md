@@ -1,6 +1,6 @@
 # Mat Bot
 
-> Front end component of the AI JAM 2024 winner implementation
+> Front end component of CSUN's AI JAM 2024 winner
 
 ## Pre-requisites
 
