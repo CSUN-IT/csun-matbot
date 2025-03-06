@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowPointer, faBars, faMicrophone, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowPointer, faBars, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import matbot from '../../images/matbot-logo.png';
 import loading from '../../images/writing-loading.gif';
 
@@ -10,7 +10,6 @@ const Home = () => {
   const [currentChatIndex, setCurrentChatIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [submissionCount, setSubmissionCount] = useState(0);
   const [marginTop, setMarginTop] = useState('2rem');
   const chatContainerRef = useRef(null);
 
@@ -18,10 +17,6 @@ const Home = () => {
     "Where can I find a place to study?",
     "How to register for my classes",
     "What events are happening on campus"
-  ];
-
-  const predefinedResponses = [
-    // ... (predefinedResponses content omitted for brevity)
   ];
 
   useEffect(() => {
@@ -41,16 +36,16 @@ const Home = () => {
     setInputValue('');
   };
 
-  const switchChat = (chatIndex) => {
-    setCurrentChatIndex(chatIndex);
-    setInputValue('');
-  };
+  // const switchChat = (chatIndex) => {
+  //   setCurrentChatIndex(chatIndex);
+  //   setInputValue('');
+  // };
 
-  const getLastQuestion = (appendedResponses) => {
-    const questionRegex = /<p class="chat-bubble chat-bubble-question.*?">(.*?)<\/p>/;
-    const match = appendedResponses.match(questionRegex);
-    return match ? match[1] : 'No question asked yet';
-  };
+  // const getLastQuestion = (appendedResponses) => {
+  //   const questionRegex = /<p class="chat-bubble chat-bubble-question.*?">(.*?)<\/p>/;
+  //   const match = appendedResponses.match(questionRegex);
+  //   return match ? match[1] : 'No question asked yet';
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -158,53 +153,53 @@ const Home = () => {
 
 
 
-  const renderChatContent = () => {
-    if (currentChatIndex !== null && chats[currentChatIndex] && chats[currentChatIndex].appendedResponses) {
-      return (
-        <div className="transition-all duration-300" style={{ marginTop }}>
-          <div dangerouslySetInnerHTML={{ __html: chats[currentChatIndex].appendedResponses }} />
-          {isLoading && (
-            <div className="flex justify-center items-center mt-4">
-              <img 
-                src={loading} 
-                alt="Loading..." 
-                className="transform scale-30"
-                style={{ transform: 'scale(0.3)' }}
-              />
-            </div>
-          )}
-        </div>
-      );
-    }
+  // const renderChatContent = () => {
+  //   if (currentChatIndex !== null && chats[currentChatIndex] && chats[currentChatIndex].appendedResponses) {
+  //     return (
+  //       <div className="transition-all duration-300" style={{ marginTop }}>
+  //         <div dangerouslySetInnerHTML={{ __html: chats[currentChatIndex].appendedResponses }} />
+  //         {isLoading && (
+  //           <div className="flex justify-center items-center mt-4">
+  //             <img 
+  //               src={loading} 
+  //               alt="Loading..." 
+  //               className="transform scale-30"
+  //               style={{ transform: 'scale(0.3)' }}
+  //             />
+  //           </div>
+  //         )}
+  //       </div>
+  //     );
+  //   }
 
-    return (
-      <div className="h-full flex flex-col justify-center items-center">
-        <img 
-          src={matbot} 
-          alt="MatBot Logo" 
-          className="w-48 h-48 md:w-64 md:h-64 object-contain"
-        />
-        <div className="w-full flex flex-col items-center mt-8">
-          {suggestions.map((suggestion, index) => (
-            <div
-              key={suggestion}
-              className="w-[65%] p-4 mb-4 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-300"
-              style={{
-                opacity: 0,
-                animation: `fadeIn 0.5s ease-out ${index * 0.2}s forwards`
-              }}
-              onClick={() => {
-                setInputValue(suggestion);
-                setDisabled(false);
-              }}
-            >
-              <p className="text-gray-600 text-center">{suggestion}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="h-full flex flex-col justify-center items-center">
+  //       <img 
+  //         src={matbot} 
+  //         alt="MatBot Logo" 
+  //         className="w-48 h-48 md:w-64 md:h-64 object-contain"
+  //       />
+  //       <div className="w-full flex flex-col items-center mt-8">
+  //         {suggestions.map((suggestion, index) => (
+  //           <div
+  //             key={suggestion}
+  //             className="w-[65%] p-4 mb-4 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-300"
+  //             style={{
+  //               opacity: 0,
+  //               animation: `fadeIn 0.5s ease-out ${index * 0.2}s forwards`
+  //             }}
+  //             onClick={() => {
+  //               setInputValue(suggestion);
+  //               setDisabled(false);
+  //             }}
+  //           >
+  //             <p className="text-gray-600 text-center">{suggestion}</p>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="min-h-screen flex flex-col">
