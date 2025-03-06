@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowPointer, faBars, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import matbot from '../../images/matbot-logo.png';
@@ -19,11 +19,7 @@ const Home = () => {
     "What events are happening on campus"
   ];
 
-  useEffect(() => {
-    createNewChat();
-  }, []);
-
-  const createNewChat = () => {
+  const createNewChat = useCallback(() => {
     const newChat = {
       id: Date.now(),
       question: '',
@@ -31,10 +27,14 @@ const Home = () => {
       context: '',
       appendedResponses: '',
     };
-    setChats([...chats, newChat]);
-    setCurrentChatIndex(chats.length);
+    setChats((prevChats) => [...prevChats, newChat]);
+    setCurrentChatIndex((prevIndex) => (prevIndex === null ? 0 : prevIndex + 1));
     setInputValue('');
-  };
+  }, []);
+
+  useEffect(() => {
+    createNewChat();
+  }, [createNewChat]);
 
   // const switchChat = (chatIndex) => {
   //   setCurrentChatIndex(chatIndex);
